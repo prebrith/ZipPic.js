@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缩放图片测试</title>
+</head>
+<body>
+<h2>选张图试试吧:</h2>
+<input id="chooser" type="file" accept="image/*">
+<script src="ZipPic.js"></script>
+<script>
+    var chooser = document.getElementById('chooser');
+    chooser.addEventListener('change',function(){
+        var reader = new FileReader();
+        reader.onload = function()
+        {
+            ZipPic(this.result,{
+                width: 200,
+                height: 200,
+                quality: 0.5,
+                done: function(results){
+                    var img = new Image();
+                    img.src = results;
+                    document.body.appendChild(img);
+                }
+            })
+        };
+
+        reader.readAsDataURL(chooser.files[0]);
+    },false);
+</script>
+</body>
+</html>
